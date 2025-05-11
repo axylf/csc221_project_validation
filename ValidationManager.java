@@ -155,8 +155,8 @@ public class ValidationManager {
             return true;
         }
 
-        //Validate header file
-        public static boolean validHeader(String line) {
+        //Validate header for file, method is dummied out because it is no longer needed.
+        /* public static boolean validHeader(String line) {
           String parts = line.split(',');
           if (parts.length != 3)
             return false;
@@ -166,7 +166,7 @@ public class ValidationManager {
               return false;
           }
           return true;
-        }
+        } */
 
         //Validate the entire CSV file
         public static boolean validateWholeCSVFile(int expectedYear, String filePath) {
@@ -175,9 +175,11 @@ public class ValidationManager {
             }
 
             try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                String line = br.readLine();
+                String line;
+		// dummied out header code below:
+		/* = br.readLine();
                 if (!validateLine(expectedYear, line) && !validHeader()) 
-                  return false;
+                  return false;*/
                 while ((line = br.readLine()) != null) {
                     if (!validateLine(expectedYear, line))
                       return false;
