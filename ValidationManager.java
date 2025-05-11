@@ -35,7 +35,9 @@ public class ValidationManager {
         }
     }
 
-    //Checks if CSV file content is valid
+    /**
+	* Class responsible for checking CSV content (e.g. dates, categories, years, etc.)
+    */
     public final static class CheckCSVContent {
 
         // Private constructor to prevent instantiation
@@ -123,20 +125,20 @@ public class ValidationManager {
         public static boolean validateLine(int expectedYear, String line) {
             String[] parts = line.split(",");
             if (parts.length != 3) {
-                System.err.println("Invalid line format: Wrong number of columns. Only Date, Category, and Amount are valid in CSV file.");
+                System.err.println("Invalid line format: Wrong number of columns. Please place proper Date, Category, and Amount entries in CSV file.");
                 return false;
             }
     
             String date = parts[0];
             String category = parts[1];
-            String amount = parts[parts.length-1];
+            String amount = parts[2];
     
             if (!validDateFormat(date)) {
                 System.err.println("Invalid date format: " + date);
                 return false;
             }
     
-            int yearInFile = Integer.parseInt(date.split("/")[parts.length-1]);
+            int yearInFile = Integer.parseInt(date.split("/")[2]);
             if (yearInFile != expectedYear) {
                 System.err.println("Year mismatch: found " + yearInFile + ", expected " + expectedYear);
                 return false;
@@ -178,7 +180,7 @@ public class ValidationManager {
                 String line;
 		// dummied out header code below:
 		/* = br.readLine();
-                if (!validateLine(expectedYear, line) && !validHeader()) 
+                if (!validateLine(expectedYear, line) && !validHeader(line)) 
                   return false;*/
                 while ((line = br.readLine()) != null) {
                     if (!validateLine(expectedYear, line))
@@ -226,12 +228,12 @@ public class ValidationManager {
         public static boolean restrictSecretPasswordValues(String secretAnswer) {
             if (secretAnswer == null || secretAnswer.trim().isEmpty()) {
                 return false;
-        }
-
-        secretAnswer = secretAnswer.trim(); // remove spaces at start/end
-
-        // Must be at least 2 characters long and only letters, numbers, spaces allowed
-        return secretAnswer.matches("[a-zA-Z0-9 ]{2,50}");
+	    }
+	
+	   secretAnswer = secretAnswer.trim(); // remove spaces at start/end
+	
+	   // Must be at least 2 characters long and only letters, numbers, spaces allowed
+	   return secretAnswer.matches("[a-zA-Z0-9 ]{2,50}");
         }
     }
 }
