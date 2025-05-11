@@ -3,7 +3,7 @@
  * @author Axyl Fredrick
  * @author Susie Marrero
  * @author Omar Quraishi
- * @version 1.01, 10 April 2025
+ * @version 1.02, 11 May 2025
  */
 import java.io.File;            // To create File objects and check if files exist, are readable, etc.
 import java.io.FileReader;       // To open a file for reading (specifically text files like CSVs).
